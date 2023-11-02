@@ -6,6 +6,6 @@ It returns true if given 2 strings are anagram.
 ### Feature 2:
 It returns previously entered string list which are anagram of the entered string.
 
-##Run the program with Maven
+## Run the program with Maven
 
 mvn clean package exec:java -Dexec.mainClass=com.beyonnex.AnagramService
