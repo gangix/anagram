@@ -24,13 +24,13 @@ public class AnagramService {
 				System.out.println("Feature number should be 1 or 2! Enter 'q' to exit.");
 				continue;
 			}
-			if(lineFeature.equalsIgnoreCase("q")) {
+			if (lineFeature.equalsIgnoreCase("q")) {
 				break;
 			}
-			
+
 			switch (lineFeature) {
-				case "1" -> executeFeature1();
-				case "2" -> executeFeature2();
+			case "1" -> executeFeature1();
+			case "2" -> executeFeature2();
 			}
 		}
 	}
@@ -39,7 +39,7 @@ public class AnagramService {
 		String lineString = getScannedString(scan, "Enter String : ");
 		List<String> list = ANAGRAM_MAP.get(lineString);
 		if (list == null) {
-			addStringToMap(lineString);
+			addStringsToMap(lineString);
 			list = ANAGRAM_MAP.get(lineString);
 		}
 		System.out.println(Arrays.toString(list.toArray()));
@@ -53,8 +53,7 @@ public class AnagramService {
 		} else {
 			System.out.println("false");
 		}
-		addStringToMap(lineString1);
-		addStringToMap(lineString2);
+		addStringsToMap(lineString1, lineString2);
 	}
 
 	private static String getScannedString(Scanner scan, String command) {
@@ -62,21 +61,25 @@ public class AnagramService {
 		return scan.nextLine();
 	}
 
-	public static void addStringToMap(String string) {
-		List<String> list = ANAGRAM_MAP.get(string);
-		if (list != null && list.size() > 0) {
-			list.add(string);
+	public static void addStringsToMap(String... stringArray) {
+		if(stringArray == null) {
 			return;
 		}
-		List<String> anagramList = ANAGRAM_MAP.keySet().stream().filter(key -> isAnagram(key.toCharArray(), string.toCharArray()))
-				.collect(Collectors.toList());
-		if (anagramList.size() > 0) {
-			ANAGRAM_MAP.put(string, anagramList);
-			anagramList.forEach(str -> ANAGRAM_MAP.get(str).add(string));
-		} else {
-			ANAGRAM_MAP.put(string, new ArrayList<>());
+		for (String string : stringArray) {
+			List<String> list = ANAGRAM_MAP.get(string);
+			if (list != null && list.size() > 0) {
+				list.add(string);
+				return;
+			}
+			List<String> anagramList = ANAGRAM_MAP.keySet().stream().filter(key -> isAnagram(key.toCharArray(), string.toCharArray()))
+					.collect(Collectors.toList());
+			if (anagramList.size() > 0) {
+				ANAGRAM_MAP.put(string, anagramList);
+				anagramList.forEach(str -> ANAGRAM_MAP.get(str).add(string));
+			} else {
+				ANAGRAM_MAP.put(string, new ArrayList<>());
+			}
 		}
-
 	}
 
 	public static boolean isAnagram(char[] charArray1, char[] charArray2) {

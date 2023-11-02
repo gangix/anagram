@@ -9,9 +9,9 @@ import java.util.Set;
 import org.junit.Test;
 
 public class AnagramServiceTest {
-	
+
 	@Test
-	public void checkAnagram_GivenTwoAnagramString_ThenReturnsTrue(){
+	public void checkAnagram_GivenTwoAnagramString_ThenReturnsTrue() {
 		char[] str1 = "ABCDEFGHJSHSGSTSAWE".toCharArray();
 		char[] str2 = "GHJASBHSCGSDTESFAWE".toCharArray();
 		boolean actual = AnagramService.isAnagram(str1, str2);
@@ -19,34 +19,33 @@ public class AnagramServiceTest {
 	}
 
 	@Test
-	public void checkAnagram_GivenTwoNotAnagramString_ThenReturnsFalse(){
+	public void checkAnagram_GivenTwoNotAnagramString_ThenReturnsFalse() {
 		char[] str1 = "ABCDEFGHJSHSGSTSAWE".toCharArray();
 		char[] str2 = "ABCDEFGHJSHSGSTSAWF".toCharArray();
 		boolean actual = AnagramService.isAnagram(str1, str2);
 		assertFalse(actual);
 	}
-	
+
 	@Test
-	public void checkAnagram_GivenOneNullString_ThenReturnsFalse(){
+	public void checkAnagram_GivenOneNullString_ThenReturnsFalse() {
 		char[] str1 = "ABCDEFGHJSHSGSTSAWE".toCharArray();
 		boolean actual = AnagramService.isAnagram(str1, null);
 		assertFalse(actual);
 	}
-	
+
 	@Test
-	public void checkAnagram_GivenBothNullString_ThenReturnsFalse(){
+	public void checkAnagram_GivenBothNullString_ThenReturnsFalse() {
 		boolean actual = AnagramService.isAnagram(null, null);
 		assertFalse(actual);
 	}
-	
+
 	@Test
-	public void addStringToMap_GivenStringList_ThenShouldHaveProperMap(){
-		AnagramService.addStringToMap("ABCDEFGHJSHSGSTSAWE");
-		AnagramService.addStringToMap("GHJASBHSCGSDTESFAWE");
-		AnagramService.addStringToMap("ABCDEFGXJSHSGSTSAWF");
-		AnagramService.addStringToMap("ABCDEFGFJSHSGSTSAWX");
-		AnagramService.addStringToMap("GFJSHSGSTSAWXABCDEF");
-		
-		assertEquals(Set.of("GFJSHSGSTSAWXABCDEF", "ABCDEFGFJSHSGSTSAWX", "ABCDEFGHJSHSGSTSAWE", "ABCDEFGXJSHSGSTSAWF", "GHJASBHSCGSDTESFAWE"), AnagramService.get_ANAGRAM_MAP().keySet());
+	public void addStringToMap_GivenStringList_ThenShouldHaveProperMap() {
+		AnagramService.addStringsToMap("ABCDEFGHJSHSGSTSAWE", "GHJASBHSCGSDTESFAWE", "ABCDEFGXJSHSGSTSAWF", "ABCDEFGFJSHSGSTSAWX",
+				"GFJSHSGSTSAWXABCDEF");
+
+		assertEquals(
+				Set.of("GFJSHSGSTSAWXABCDEF", "ABCDEFGFJSHSGSTSAWX", "ABCDEFGHJSHSGSTSAWE", "ABCDEFGXJSHSGSTSAWF", "GHJASBHSCGSDTESFAWE"),
+				AnagramService.get_ANAGRAM_MAP().keySet());
 	}
 }
